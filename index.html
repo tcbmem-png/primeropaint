@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primero Paint & Drywall | Oxford, MS</title>
+  <meta name="description" content="Primero Paint & Drywall — professional interior and exterior painting, drywall, and finishing services in Greater Memphis, TN and Oxford, MS." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,500;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --navy:   #1F2A44;
+      --cream:  #F5F1EA;
+      --gold:   #C8A46B;
+      --gold-lt:#D9BA8C;
+      --char:   #2E2E2E;
+      --mid:    #6B7280;
+      --white:  #FFFFFF;
+      --radius: 3px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--char);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Utility ── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section--dark { background: var(--navy); color: var(--cream); }
+    .section--navy-mid { background: #253255; color: var(--cream); }
+    .serif { font-family: 'Playfair Display', serif; }
+    .gold { color: var(--gold); }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 34px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border-radius: var(--radius);
+    }
+    .btn--gold { background: var(--gold); color: var(--navy); }
+    .btn--gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,164,107,0.35); }
+    .btn--outline { background: transparent; border: 2px solid var(--cream); color: var(--cream); }
+    .btn--outline:hover { background: var(--cream); color: var(--navy); }
+    .btn--navy { background: var(--navy); color: var(--cream); }
+    .btn--navy:hover { background: #253255; transform: translateY(-2px); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(31,42,68,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,164,107,0.2);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-logo svg { width: 44px; height: 44px; }
+    .nav-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .nav-wordmark span {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      color: var(--gold);
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.82;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-cta { margin-left: 12px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 85% 50%, rgba(200,164,107,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(200,164,107,0.07) 0%, transparent 60%);
+    }
+    /* Paint stroke accent */
+    .hero-stroke {
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 560px;
+      height: 560px;
+      opacity: 0.06;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 5.5vw, 72px);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.08;
+      margin-bottom: 28px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(245,241,234,0.72);
+      margin-bottom: 44px;
+      max-width: 460px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .hero-phone {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--cream);
+      opacity: 0.65;
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-phone::before { content: '—'; color: var(--gold); }
+
+    /* Hero visual: big icon + stats */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-icon-wrap {
+      position: relative;
+    }
+    .hero-icon-wrap svg { width: 280px; height: 280px; filter: drop-shadow(0 20px 60px rgba(200,164,107,0.25)); }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 100%;
+    }
+    .stat {
+      background: rgba(245,241,234,0.06);
+      border: 1px solid rgba(245,241,234,0.1);
+      padding: 20px 16px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .stat:first-child { border-radius: 3px 0 0 3px; }
+    .stat:last-child { border-radius: 0 3px 3px 0; }
+    .stat:hover { background: rgba(245,241,234,0.1); }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.5);
+      margin-top: 6px;
+    }
+
+    /* ── Services ── */
+    #services { background: var(--cream); }
+    .section-header { margin-bottom: 64px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--navy);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-sub {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 520px;
+      margin-top: 16px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--navy);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover { transform: translateY(-4px); }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-style: italic;
+      color: rgba(200,164,107,0.18);
+      line-height: 1;
+      position: absolute;
+      top: 20px; right: 24px;
+    }
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(200,164,107,0.12);
+      border: 1px solid rgba(200,164,107,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 20px;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(245,241,234,0.62);
+    }
+
+    /* ── Why Us ── */
+    #why { background: #F0EBE1; }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+    .why-item { display: flex; gap: 20px; align-items: flex-start; }
+    .why-bullet {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .why-bullet svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 2.5; }
+    .why-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .why-item p { font-size: 13.5px; line-height: 1.65; color: var(--mid); }
+    .why-visual {
+      position: relative;
+    }
+    .why-card-big {
+      background: var(--navy);
+      padding: 56px 44px;
+      border-radius: 4px;
+      text-align: center;
+      position: relative;
+    }
+    .why-card-big::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(200,164,107,0.25);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    .why-card-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.55;
+      margin: 24px 0 20px;
+    }
+    .why-card-attr {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.45);
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 0.8;
+    }
+
+    /* ── Sister company band ── */
+    #sister {
+      background: var(--navy);
+      padding: 56px 0;
+      border-top: 1px solid rgba(200,164,107,0.2);
+      border-bottom: 1px solid rgba(200,164,107,0.2);
+    }
+    .sister-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .sister-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sister-text p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--cream);
+    }
+    .sister-text .sub {
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-size: 13px;
+      color: rgba(245,241,234,0.55);
+      margin-top: 6px;
+    }
+    .sister-divider {
+      width: 1px;
+      height: 60px;
+      background: rgba(200,164,107,0.3);
+      flex-shrink: 0;
+    }
+
+    /* ── CTA / Contact ── */
+    #contact {
+      background: var(--navy);
+      padding: 100px 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 40%, rgba(200,164,107,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-inner { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; text-align: center; }
+    #contact .section-title { color: var(--cream); }
+    #contact .section-sub { color: rgba(245,241,234,0.6); margin: 0 auto; margin-top: 16px; }
+
+    /* Form */
+    .quote-form {
+      margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.5);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,241,234,0.15);
+      border-radius: var(--radius);
+      color: var(--cream);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(245,241,234,0.28); }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: rgba(200,164,107,0.06);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      margin-top: 6px;
+      width: 100%;
+      padding: 16px;
+      font-size: 12px;
+      letter-spacing: 0.28em;
+    }
+    .form-note {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(245,241,234,0.32);
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+    }
+    /* Success state */
+    .form-success {
+      display: none;
+      margin-top: 52px;
+      padding: 48px 36px;
+      background: rgba(200,164,107,0.1);
+      border: 1px solid rgba(200,164,107,0.3);
+      border-radius: 4px;
+      text-align: center;
+    }
+    .form-success .check {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .form-success h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .form-success p { font-size: 14px; color: rgba(245,241,234,0.55); }
+
+    .contact-detail {
+      margin-top: 40px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.3);
+    }
+    .contact-detail a { color: var(--gold); }
+    .contact-detail a:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #151D30;
+      padding: 40px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--cream);
+      opacity: 0.6;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(245,241,234,0.35);
+      letter-spacing: 0.08em;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.4);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.55s; }
+    .delay-5 { animation-delay: 0.7s; }
+
+    /* ── Mobile ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 56px; text-align: center; }
+      .hero-tag { justify-content: center; }
+      .hero-body { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-phone { justify-content: center; }
+      .hero-visual { display: none; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+      .why-grid { grid-template-columns: 1fr; gap: 48px; }
+      .sister-divider { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 64px 0; }
+      .hero-stats { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!-- Inline icon SVG -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#F5F1EA" stroke-width="4"/>
+          <rect x="20" y="110" width="160" height="14" rx="2" fill="#C8A46B" opacity="0.95"/>
+          <circle cx="178" cy="132" r="4" fill="#C8A46B" opacity="0.85"/>
+          <text x="100" y="150" text-anchor="middle"
+                font-family="'Playfair Display', 'Times New Roman', serif"
+                font-style="italic" font-weight="500" font-size="170" fill="#F5F1EA">P</text>
+        </svg>
+        <div class="nav-wordmark">
+          Primero
+          <span>Paint · Drywall</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#sister">Sister Co.</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="tel:+19015550000" class="btn btn--gold nav-cta">Get a Quote</a>
+      <div class="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <p class="hero-tag fade-up">Greater Memphis, TN &amp; Oxford, MS</p>
+        <h1 class="hero-headline fade-up delay-1">
+          Paint that <em>speaks</em><br>before you do.
+        </h1>
+        <p class="hero-body fade-up delay-2">
+          Primero Paint &amp; Drywall brings precision craftsmanship and a clean, professional finish to every residential and commercial project — on time, every time.
+        </p>
+        <div class="hero-actions fade-up delay-3">
+          <a href="#contact" class="btn btn--gold">Get a Free Estimate</a>
+          <a href="#services" class="btn btn--outline">Our Services</a>
+        </div>
+        <p class="hero-phone fade-up delay-4">Licensed &amp; Insured · Free Estimates · Memphis TN &amp; Oxford MS</p>
+      </div>
+
+      <div class="hero-visual fade-up delay-2">
+        <div class="hero-icon-wrap">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="200" fill="none"/>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="#F5F1EA" stroke-width="3" opacity="0.7"/>
+            <rect x="20" y="110" width="160" height="14" rx="2" fill="#C8A46B" opacity="0.9"/>
+            <circle cx="178" cy="132" r="4" fill="#C8A46B" opacity="0.8"/>
+            <text x="100" y="150" text-anchor="middle"
+                  font-family="'Playfair Display', 'Times New Roman', serif"
+                  font-style="italic" font-weight="500" font-size="170" fill="#F5F1EA">P</text>
+          </svg>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Years</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5★</div>
+            <div class="stat-label">Rated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="tag">What We Do</p>
+        <h2 class="section-title">Full-service <em>painting</em><br>&amp; drywall.</h2>
+        <p class="section-sub">From prep to final coat, we handle every detail so you don't have to.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-num">01</span>
+          <div class="service-icon">🏠</div>
+          <h3>Interior Painting</h3>
+          <p>Walls, ceilings, trim, and cabinets. Precise lines, premium paints, and spotless cleanup on every job.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">02</span>
+          <div class="service-icon">🏢</div>
+          <h3>Exterior Painting</h3>
+          <p>Weather-resistant finishes that hold up to Tennessee and Mississippi summers. Power washing, caulking, and full prep included.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">03</span>
+          <div class="service-icon">🔧</div>
+          <h3>Drywall & Repair</h3>
+          <p>Hang, tape, mud, and finish. Patch holes, fix water damage, or complete a full new-build hang from scratch.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">04</span>
+          <div class="service-icon">🏗️</div>
+          <h3>Commercial Projects</h3>
+          <p>Offices, retail, and multi-family. We work around your schedule to minimize disruption.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">05</span>
+          <div class="service-icon">✨</div>
+          <h3>Texture & Finish</h3>
+          <p>Orange peel, knockdown, smooth, and decorative finishes. We match existing texture or create something new.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">06</span>
+          <div class="service-icon">🎨</div>
+          <h3>Color Consulting</h3>
+          <p>Not sure what to choose? We'll help you select palettes that work with your light, space, and style.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY US ── -->
+  <section id="why" class="section">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <p class="tag">Why Primero</p>
+          <h2 class="section-title">Craftsmanship you can <em>see</em>.</h2>
+          <ul class="why-list">
+            <li class="why-item">
+              <div class="why-bullet">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>On-site, on time</h4>
+                <p>We show up when we say we will and finish when we say we'll finish. No ghost jobs.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-bullet">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>Premium materials only</h4>
+                <p>We use Sherwin-Williams and Benjamin Moore products — what the pros trust for lasting color and coverage.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-bullet">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>Fully licensed &amp; insured</h4>
+                <p>You're protected on every project. We carry full liability and workers' comp coverage.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-bullet">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>Clean site, every day</h4>
+                <p>We protect your floors, furniture, and fixtures. You won't find paint where it doesn't belong.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="why-visual">
+          <div class="why-card-big">
+            <div class="quote-mark">"</div>
+            <p class="why-card-quote">They painted our whole house and I didn't find a single drop on the hardwood. I've never seen that level of care from a contractor before.</p>
+            <p class="why-card-attr">— Oxford, MS Homeowner</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SISTER CO BAND ── -->
+  <section id="sister">
+    <div class="container">
+      <div class="sister-inner">
+        <div class="sister-text">
+          <h3>Sister Company</h3>
+          <p>Ladies Primera Cleaning</p>
+          <p class="sub">Professional residential &amp; commercial cleaning · Greater Memphis &amp; North MS</p>
+        </div>
+        <div class="sister-divider"></div>
+        <p style="font-size:14px;line-height:1.6;color:rgba(245,241,234,0.55);max-width:340px;">
+          Need it cleaned before we paint, or after we're done? Our sister company has you covered — same trusted name, same standard of care.
+        </p>
+        <a href="https://ladiesprimera901.com" target="_blank" rel="noopener" class="btn btn--gold">Visit ladiesprimera901.com ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT / CTA ── -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-inner">
+        <p class="tag" style="display:block;text-align:center;">Free Estimate</p>
+        <h2 class="section-title">
+          Ready for a <em style="color:var(--gold);">fresh start?</em>
+        </h2>
+        <p class="section-sub">Tell us about your project — we'll follow up within one business day.</p>
+
+        <!-- Quote Form — powered by Formspree -->
+        <!-- SETUP: Replace YOUR_FORM_ID below after creating a free form at formspree.io pointing to tcbmem@gmail.com -->
+        <form
+          class="quote-form"
+          id="quoteForm"
+          action="https://formspree.io/f/mwvyllnp"
+          method="POST"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" placeholder="(662) 555-0000" required />
+            </div>
+            <div class="form-group">
+              <label for="address">Property Address *</label>
+              <input type="text" id="address" name="address" placeholder="123 Main St, Memphis TN or Oxford MS" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="details">Project Details <span style="opacity:.5;font-weight:400;">(optional)</span></label>
+            <textarea id="details" name="details" placeholder="Interior paint, 3 bedrooms + living room. Looking to schedule for late June…"></textarea>
+          </div>
+          <!-- Honeypot spam trap -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="New Quote Request — Primero Paint" />
+
+          <button type="submit" class="btn btn--gold form-submit">Send My Request →</button>
+          <p class="form-note">No spam. We'll reach out to schedule your free on-site estimate.</p>
+        </form>
+
+        <!-- Success message (shown after submit) -->
+        <div class="form-success" id="formSuccess">
+          <div class="check">✦</div>
+          <h3>We got it — thank you!</h3>
+          <p>We'll be in touch within one business day to schedule your free estimate.</p>
+        </div>
+
+        <p class="contact-detail">
+          Greater Memphis, TN &amp; Oxford, MS ·
+          <a href="https://primeropaint.com">primeropaint.com</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Primero</span>
+        <div class="footer-links">
+          <a href="https://ladiesprimera901.com" target="_blank" rel="noopener">Ladies Primera</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <p class="footer-copy">&copy; 2025 Primero Paint &amp; Drywall. Greater Memphis, TN &amp; Oxford, MS.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const links = document.querySelector('.nav-links');
+      const cta = document.querySelector('.nav-cta');
+      if (links) {
+        const open = links.style.display === 'flex';
+        links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(31,42,68,0.98);padding:28px 24px;gap:20px;z-index:99;backdrop-filter:blur(10px);';
+        if (cta) cta.style.display = open ? '' : 'block';
+      }
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        const links = document.querySelector('.nav-links');
+        if (links) links.style.cssText = '';
+      });
+    });
+
+    // Quote form — AJAX submit to Formspree
+    const form = document.getElementById('quoteForm');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+          } else {
+            btn.textContent = 'Something went wrong — try again';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Network error — try again';
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
